@@ -1,20 +1,25 @@
-# Chicago Police Data Analysis
+# Project Proposal: Chicago Police Data Analysis
 
-1. Choose a public data set from the web that you are interested in to carry out a small data analysis. You may also use any data set we have previously worked with in MDS. Correctly cite where your data set is coming from in your proposal. Be sure that it is a data set that is licensed to be shared and used openly on the internet.
+### 1. Working Dataset
 
-The original datasets and documents are sourced from the Chicago Police Department (CPD), Civillian Office of Police Accountability (COPA), the Independent Police Review Authority (IPRA), or the City of Chicago. However, we are building off of data that has been cleaned and matched from a [repository](https://github.com/invinst/chicago-police-data) maintained by the [Invisible Institute] (https://invisible.institute/introduction). 
+The original datasets and documents are sourced from the Chicago Police Department (CPD), Civillian Office of Police Accountability (COPA), the Independent Police Review Authority (IPRA), or the City of Chicago. However, we are building off of data that has been cleaned and matched from a [repository](https://github.com/invinst/chicago-police-data) maintained by the [Invisible Institute](https://invisible.institute/introduction). 
 
-2. With your data set, identify one main predictive or inferential research question that you will attempt to answer with analyses and visualizations (more on this below). Clearly state the research question and any natural sub-questions you need to address, and their type.
+### 2. Research Question
 
-With this data set we will atempt to answer inferential question.  
+With our data set we would look answer the main inferential question of if complaint rates per year differ for officers in different salary groups from the years 2005-2015.
 
-3. Make a plan of how you will analyze the data (report an estimate and confidence intervals? hypothesis test? classification with a decision tree?). Choose something you already learned how to do in another MDS course.
+### 3. Analysis Plan
 
+As the CPD data set is stored in two separate files we will have to consolidate the files joining through the unique officer names. We would calculate a complaint rate per year, and bin salaries into appropriate groups to conduct a hypothesis test. 
 
+### 4. Approach Towards Explanatory Data Analysis 
 
-4. Discuss at least one exploratory data analysis (EDA) table and one exploratory data analysis figure you will create that makes sense for your research question, the data that you have, and the analysis you plan to do.
+- Number of rows dropped during joining of data
+- Number of complaints per year
+- Number of complaints per officer
+- Distribution of salary 
+- Descriptive statistics of salaries
 
+### 5. Presentation of Results
 
-
-5. Suggest how you would share the results of your analysis as one or more tables and/or figures.
-
+We could show the results of our analysis with a violin plot that also include the confidence interval and mean of our observations.
