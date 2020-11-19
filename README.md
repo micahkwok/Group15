@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+# Chicago Police Dataset (CPD)
+=======
 # Project Proposal: Chicago Police Data Analysis
 
 ### 1. Working Dataset
@@ -23,3 +26,4 @@ As the CPD data set is stored in two separate files we will have to consolidate 
 ### 5. Presentation of Results
 
 We could show the results of our analysis with a violin plot that also include the confidence interval and mean of our observations.
+>>>>>>> upstream/main
