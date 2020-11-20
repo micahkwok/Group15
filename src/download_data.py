@@ -11,6 +11,7 @@ import io
 import requests
 import pandas as pd
 from docopt import docopt
+import gzip
 
 opt = docopt(__doc__)
 
