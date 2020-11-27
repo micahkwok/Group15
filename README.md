@@ -23,13 +23,13 @@ python src/download_data.py download_data.py --url=https://github.com/invinst/ch
 # Clean / preprocess data
 Rscript src/read_preprocess_data.R --file_path=data --out_dir=data/processed
 
-# create exploritory data analysis figures and write to file
+# Create exploritory data analysis figures and write to file
 Rscript src/generate_EDA_figures.R --all_data=data/complaints_all_staff --police_data=data/complaints_police --out_dir=eda/images
 
-# run statistical analysis 
+# Run statistical analysis 
 Rscript src/linear_regression_analysis --file_path=data --out_dir=results
 
-# render final report?
+# Render final report?
 ```
 
 ## Dependencies
