@@ -1,6 +1,55 @@
 # Chicago Police Dataset (CPD)
 
-# Project Proposal: Chicago Police Data Analysis
+- authors: Ela Bandari, Elanor Boyle-Stanley, Micah Kwok
+
+Analysis of complaints received by the Chigaco Police Department from the years 2005-2015. 
+
+## About
+Datasets and documents are sourced from the Chicago Police Department (CPD), Civillian Office of Police Accountability (COPA), the Independent Police Review Authority (IPRA), or the City of Chicago. However, we are building off of data that has been cleaned and matched from a [repository](https://github.com/invinst/chicago-police-data) maintained by the [Invisible Institute](https://invisible.institute/introduction). 
+
+## Report
+The final report can be found <link to final report>
+
+## Usage
+In order to replicate our analysis, clone this GitHub repository, ensure you have installed all the dependencies below, then run the following commands at the command lin/terminal from the project directory. 
+
+```
+# download data
+python src/download_data.py download_data.py --url=https://github.com/invinst/chicago-police-data/blob/master/data/unified_data/salary/salary-ranks_2002-2017_2017-09.csv.gz?raw=true --path=data/complaints.csv
+python src/download_data.py download_data.py --url=https://github.com/invinst/chicago-police-data/blob/master/data/unified_data/complaints/complaints-accused.csv.gz?raw=true --path=data/accused.csv
+python src/download_data.py download_data.py --url=https://github.com/invinst/chicago-police-data/blob/master/data/unified_data/complaints/complaints-complaints.csv.gz?raw=true --path=data/salary.csv
+python src/download_data.py download_data.py --url=https://github.com/invinst/chicago-police-data/blob/master/data/unified_data/profiles/final-profiles.csv.gz?raw=true --path=data/demographics
+
+# clean / preprocess data
+Rscript src/read_preprocess_data.R --file_path=data --out_dir=data
+
+# create exploritory data analysis figures and write to file
+Rscript src/generate_EDA_figures.R --all_data=data/complaints_all_staff --police_data=data/complaints_police --out_dir=eda/images
+
+# run statistical analysis 
+Rscript src/linear_regression_analysis --file_path=data --out_dir=results
+
+# render final report?
+```
+
+## Dependencies
+- Python 3.8.3 and Python packages:
+    - docopt==0.6.2
+    - os==
+    - pandas==1.1.1
+    - requests==2.23.0
+    - gzip==
+
+- R version 4.0.2 and R packages:
+    - docopt==0.7.1
+    - tidyverse==1.3.0
+    - janitor==2.0.1
+    - lubridate==1.7.9 
+    - GGally==2.0.0
+    - broom==0.7.0
+
+
+# OLD TO BE REMOVED BEFORE FINAL SUBMISSION - Project Proposal: Chicago Police Data Analysis
 
 ### 1. Working Dataset
 
