@@ -47,7 +47,7 @@ complaints_all_staff %>%
     scale_x_continuous(breaks = 2005:2015) +
     ggsave(paste0(out_dir,"/staff_by_year.png"))
 
-# #Histogram of total complaints per officer - total complaints does not match because one complaint can be tied to multiple officers
+#Histogram of total complaints per officer - total complaints does not match because one complaint can be tied to multiple officers
 complaints_all_staff %>% 
     group_by(link_UID) %>%
     summarize(n = sum(complaints_per_year)) %>%
@@ -57,7 +57,7 @@ complaints_all_staff %>%
     geom_histogram(bins = 20) +
     ggsave(paste0(out_dir,"/total_complaints_histogram.png"))
 
-# #Faceted per year histogram
+#Faceted per year histogram
 complaints_all_staff %>% 
     group_by(link_UID, year) %>%
     summarize(n = sum(complaints_per_year)) %>%
@@ -68,7 +68,7 @@ complaints_all_staff %>%
     facet_wrap(~year, nrow=3) +
     ggsave(paste0(out_dir,"/faceted_histogram.png"))
 
-# # Complaints by officer rank
+# Complaints by officer rank
 complaints_all_staff %>% 
     group_by(cleaned_rank) %>%
     summarize(n = sum(complaints_per_year)) %>%
@@ -78,7 +78,7 @@ complaints_all_staff %>%
     geom_col() +
     ggsave(paste0(out_dir,"/complaints_by_rank.png"))
 
-# #Police Officer Salary Distribution
+#Police Officer Salary Distribution
 complaints_police %>% 
     ggplot(aes(x = salary)) + 
     geom_histogram() + 
@@ -87,21 +87,21 @@ complaints_police %>%
     scale_x_continuous(labels = scales::label_dollar()) +
     ggsave(paste0(out_dir,"/police_salary_dist.png"))
 
-# #Police Officer Age Dist (2015, chosen b/c a recent year that is pretty representative)
+#Police Officer Age Dist (2015, chosen b/c a recent year that is pretty representative)
 complaints_police %>% filter(year == 2015) %>% 
     ggplot(aes(x = approx_age)) + geom_histogram(bins = 20) +
     ggtitle("Approximate Age of Police Officers in 2015") +
     labs(x = "Approximate Age", y = "Count") +
     ggsave(paste0(out_dir,"/police_age_dist.png"))
 
-# #Distribution of years of service in 2015
+#Distribution of years of service in 2015
 complaints_police %>% filter( year == 2015) %>% 
     ggplot(aes(x = approx_years_service)) + geom_histogram(bins = 20) +
     ggtitle("Approximate Years of Service of Police Officers in 2015") +
     labs(x = "Approximate Years of Service", y = "Count") +
     ggsave(paste0(out_dir,"/police_exp_dist.png"))   
 
-# # Gender Bar Chart 2015
+# Gender Bar Chart 2015
 complaints_police %>% filter(year == 2015) %>% group_by(year, gender) %>% 
     add_count(gender) %>% 
     ggplot(aes(x = reorder(gender, -n))) + 
@@ -110,7 +110,7 @@ complaints_police %>% filter(year == 2015) %>% group_by(year, gender) %>%
     labs(x = "Gender", y = "Count") +
     ggsave(paste0(out_dir,"/police_gender.png"), width = 5, height = 7)
 
-# # Race Bar Chart for 2015
+# Race Bar Chart for 2015
 complaints_police %>% filter(year == 2015) %>% group_by(year, race) %>% 
     add_count(race) %>% 
     ggplot(aes(y = reorder(race,-n))) + 
@@ -119,7 +119,7 @@ complaints_police %>% filter(year == 2015) %>% group_by(year, race) %>%
     labs(x = "Count" , y = "Race") + 
     ggsave(paste0(out_dir,"/police_race.png"))
 
-# #Correlation Matrix ggpairs (can't use ggsave to save png)
+#Correlation Matrix ggpairs (can't use ggsave to save png)
 png(paste0(out_dir,"/corr_matrix.png"))
 corr_matrix <- complaints_police %>% 
     select(salary, approx_age, approx_years_service, complaints_per_year) %>% 
