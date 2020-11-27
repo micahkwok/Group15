@@ -43,7 +43,7 @@ complaints_all_staff %>%
     ggplot(aes(x = year, y = n)) + 
     geom_line() + 
     ggtitle("Number of Police Staff per Year") + 
-    labs(x = "Year", y = "Count of Complaints") + 
+    labs(x = "Year", y = "Count of Officers") + 
     scale_x_continuous(breaks = 2005:2015) +
     ggsave(paste0(out_dir,"/staff_by_year.png"))
 
