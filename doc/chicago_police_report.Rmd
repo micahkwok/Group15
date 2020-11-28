@@ -1,0 +1,130 @@
+---
+title: "Chicago Police Report"
+bibliography: references.bib
+output: 
+  html_document:
+    toc: true
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+```
+
+# Chicago Police Data Analysis
+
+-   authors: Ela Bandari, Elanor Boyle-Stanley, Micah Kwok
+
+# Summary
+
+In this project we attempt to investigate whether there is an association between the number of complaints a police officer in the Chicago Police Department receives per year and the officer's annual salary. To better understand this relationship we constructed and examined three linear regression models: 1) a simple linear regression model with number of complaints per year as the response variable and annual salary as the predictor variable, 2) a multivariable linear regression model with number of complaints per year as the response variable and annual salary and gender of the officer as the predictor variables, and 3) a multivariable linear regression model with number of complaints per year as the response variable and annual salary, gender, race and age of the officer as the predictor variables. We included demographic variables in two of our regression models as they can have confounding effects in our investigation of the association between number of complaints per year and annual salary. Based on an examination of the coefficients of regression and their p-values we can conclude that there is a small but significant association between number of complaints an officer receives per year and their annual salary.
+
+# Introduction
+
+In the workforce we tend to associate higher salaries with higher levels of performance, since people who are good at their job tend to get paid more. With this study we wanted to take a look and answer an inferential question of whether a police staff member's salary influences the number of complaints per year they receive.
+
+# Methods
+
+## Dataset
+
+The original datasets and documents are sourced from the Chicago Police Department (CPD), Civillian Office of Police Accountability (COPA), the Independent Police Review Authority (IPRA), or the City of Chicago. However, we are building off of data that has been cleaned and matched from a [repository](https://github.com/invinst/chicago-police-data) maintained by the [Invisible Institute](https://invisible.institute/introduction). We have used a subset of the data from the years 2005 to 2015.
+
+## Analysis
+
+Simple and multivariable linear regression models were used to determine if there was an association between the number of complaints an officer receives per year and the officer's salary. Number of complaints, salary and officer demographic variables (i.e. gender, race and age) were the variables used from the original dataset. The R programming language [@R] and the following R packages: tidyverse [@tidyverse], doctopt [@docopt], knitr [@knitr] were used to conduct these analyses. The code used to perform the analysis and create this report can be found here: <https://github.com/UBC-MDS/CPD>
+
+# Results and Discussion
+
+To better answer whether a police staff member's salary influences their number of complaints per year, we found it helpful to start with a high level view of the Chicago Police Data and looked at the complaints per year.
+
+```{r complaints images, echo = FALSE, out.width = '45%', out.height = '45%', fig.cap="Figure 1. Example text", out.width = "45%"}
+knitr::include_graphics(c('../eda/images/complaints_by_year.png','../eda/images/staff_by_year.png'))
+```
+
+We see that the complaints per year have been falling from 2007 onwards, but a portion of it can be contributed to declining total staff numbers. Instead, if we look at the complaints per year per officer, we see that the overall trend has not really changed from year to year.
+
+```{r faceted histogram, echo = FALSE, out.width = '65%', out.height = '65%', fig.cap="Figure 2. Example text", out.width = "65%"}
+knitr::include_graphics('../eda/images/faceted_histogram.png')
+```
+
+As the majority of complaints filed from 2005-2015 were against those ranked as a Police Officer, we decided to focus our study on this group of staff.
+
+```{r officer breakdown image, echo = FALSE, out.width = '45%', out.height = '45%', fig.cap="Figure 3. Example text", out.width = "45%"}
+knitr::include_graphics(c('../eda/images/complaints_by_rank.png','../eda/images/police_salary_dist.png'))
+```
+
+Taking a closer look at this group of Police Officers, we found that their salary ranged from \$36,984 to \$122,100 with a mean of \$73,773. In terms of age, the average police officer in 2015 was about 41 years old and this was a relatively normal distribution. These officers had about 12 years of service but this distribution was harder to characterize with a number of officers having less than seven years of service.
+
+```{r police officer distribution, echo = FALSE, out.width = '45%', out.height = '45%', fig.cap="Figure 4. Example text", out.width = "45%"}
+knitr::include_graphics(c('../eda/images/police_age_dist.png','../eda/images/police_exp_dist.png'))
+```
+
+In the gender and race bar charts we can see that the majority of police officers are male and white. By looking at just one year, 2015, we are able to prevent double-counting and get an understanding of the distributions of the Police Officer sub-group. We chose 2015 as it was relatively recent and represented the other years quite well.
+
+```{r police officer demographics, echo = FALSE, out.width = '45%', out.height = '45%', fig.cap="Figure 5. Example text", out.width = "45%"}
+knitr::include_graphics(c('../eda/images/police_gender.png','../eda/images/police_race.png'))
+```
+
+With a better understanding of our group of interest, we generated a correlation matrix to see if there were any strong correlations between salary, age, years of service and complaints per year. While our initial inferential question focuses on salary and complaints per year, knowing that there may be more variables accounting for a change in complaints per year led us to add these other variables. From this matrix we saw a relatively small negative coefficient between salary and complaints per year and proceeded with our analysis.
+
+```{r correlation matrix image, echo = FALSE, out.width = '75%', out.height ='75%', fig.cap="Figure 6. Example text", out.width = "75%"}
+knitr::include_graphics('../eda/images/corr_matrix.png')
+```
+
+### Simple Linear Regression Model
+
+Upon completing our EDA, we moved on to constructing our linear models.
+
+Our first linear model is a simple linear model described by the following equation:
+
+$$ \texttt{complaints_per_year}_i = \beta_0 + \beta_1 \times \texttt{salary_scaled}_i + \varepsilon_i $$
+
+The coefficents of this model and their p-values are presented below:
+
+```{r}
+knitr::kable(readRDS('../results/salary_reg.rds'), caption = "Table 1. Example text")
+```
+
+Our line of regression can also be visualized by the graph below:
+
+```{r regression visualization, echo = FALSE, out.width = '75%', out.height = '75%', fig.cap="Figure 7. Example text", out.width = "75%"}
+knitr::include_graphics('../results/salary_reg.png')
+```
+
+### Interpretation of Simple Regression Model
+
+Our simple regression model indicated a change of -0.09258197 (in \$10,000) is associated with 1 complaint increase in number of complaints received by a police officer in a year.
+
+### Multivariable Regression Models
+
+In addition to the simple regression model, we have also considered multivariable linear regression models that would take into account confounding effects by demographics factors.
+
+Our second model includes a single demographic term, gender, which seemed to have explanatory power according to our EDA. It is described by the equation below:
+
+$$ \texttt{complaints_per_year}_i = \beta_0 + \beta_1 \times \texttt{salary_scaled}_i + \beta_2 \times \texttt{gender}_i + \beta_3 \times \texttt{comment_percentage}_i + \varepsilon_i $$
+
+The coefficents of this model and their p-values are presented below:
+
+```{r}
+knitr::kable(readRDS('../results/salary_gender_reg.rds'), caption = "Table 2. Example text")
+```
+
+Our third and final model includes all demographic terms(i.e. gender, race and age) and is described by the equation below:
+
+$$ \texttt{complaints_per_year}_i = \beta_0 + \beta_1 \times \texttt{salary_scaled}_i + \beta_2 \times \texttt{gender}_i + \beta_3 \times \texttt{race}_i +  \beta_4 \times \texttt{approx_age}_i + \varepsilon_i $$
+
+The coefficents of this model and their p-values are presented below:
+
+```{r}
+knitr::kable(readRDS('../results/salary_demographics_reg.rds'), caption = "Table 3. Example text")
+```
+
+As seen above, the additional demographic variables have statistically significant coefficients, which implies that they have an effect on the number of complaints. Therefore we should take these potentially confounding variables into account to control for their effect on the number of complaints. This would allow us to examine the true relationship between salary and number of complaints while considering these variables. As per Tiff's suggestions, we will be evaluating the performance of these models in the next iteration of our project once we have learned this material in 561. We plan to determine which model can best describe our data.
+
+We also acknowledge that our data does not fit all the assumptions of linear regression, therefore, we will be interpreting the results of our analysis with caution. The independence assumption is likely not met as individual officers may appear in more than one year. Additionally, it appears that the assumption of linearity is violated based on Figure 7.
+
+# References
+
+Irizarry, R. (2020, November 16). Introduction to Data Science. Retrieved November 28, 2020, from <https://rafalab.github.io/dsbook/regression.html>
+
+Invisible Institute. (2017). Invinst/chicago-police-data. Retrieved November 28, 2020, from <https://github.com/invinst/chicago-police-data>

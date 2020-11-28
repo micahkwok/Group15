@@ -7,8 +7,8 @@ Saves the plots as a png file.
 Usage: src/generate_EDA_figures.r --all_data=<all_data> --police_data=<police_data> --out_dir=<out_dir>
   
 Options:
---all_data=<all_data>     Path (including filename) to prerocessed full dataset
---police_data=<police_data>     Path (including filename) to prerocessed subsetted data of Police Officers
+--all_data=<all_data>     Path (including filename) to preprocessed full dataset
+--police_data=<police_data>     Path (including filename) to preprocessed subsetted data of Police Officers
 --out_dir=<out_dir> Path to directory where the plots should be saved
 " -> doc
 
@@ -108,7 +108,7 @@ complaints_police %>% filter(year == 2015) %>% group_by(year, gender) %>%
     geom_bar() +
     ggtitle("2015 Police Officer Gender Breakdown") +
     labs(x = "Gender", y = "Count") +
-    ggsave(paste0(out_dir,"/police_gender.png"), width = 5, height = 7)
+    ggsave(paste0(out_dir,"/police_gender.png"))
 
 # Race Bar Chart for 2015
 complaints_police %>% filter(year == 2015) %>% group_by(year, race) %>% 
