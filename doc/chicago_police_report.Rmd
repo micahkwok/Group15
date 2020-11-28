@@ -33,7 +33,7 @@ The original datasets and documents are sourced from the Chicago Police Departme
 
 ## Analysis
 
-Simple and multivariable linear regression models were used to determine if there was an association between the number of complaints an officer receives per year and the officer's salary. Number of complaints, salary and officer demographic variables (i.e. gender, race and age) were the variables used from the original dataset. The R programming language [@R] and the following R packages: tidyverse [@tidyverse], doctopt [@docopt], knitr [@knitr] were used to conduct these analyses. The code used to perform the analysis and create this report can be found here: <https://github.com/UBC-MDS/CPD>
+Simple and multivariable linear regression models were used to determine if there was an association between the number of complaints an officer receives per year and the officer's salary. Number of complaints, salary and officer demographic variables (i.e. gender, race and age) were the variables used from the original dataset. The R programming language [@R] and the following R packages: tidyverse [@tidyverse], doctopt [@docopt], knitr [@knitr], janitor [@janitor], lubridate [@lubridate], GGally [@GGally], broom [@broom] were used to conduct these analyses. The code used to perform the analysis and create this report can be found here: <https://github.com/UBC-MDS/CPD>
 
 # Results and Discussion
 
@@ -89,7 +89,7 @@ knitr::kable(readRDS('../results/salary_reg.rds'), caption = "Table 1. Simple Li
 
 Our line of regression can also be visualized by the graph below:
 
-```{r regression visualization, echo = FALSE, out.width = '75%', out.height = '75%', fig.cap="Figure 7. Scatterplot with Line of Regression in Blue", out.width = "75%"}
+```{r regression visualization, echo = FALSE, out.width = '75%', out.height = '75%', fig.cap="Figure 9. Scatterplot with Line of Regression in Blue", out.width = "75%"}
 knitr::include_graphics('../results/salary_reg.png')
 ```
 
