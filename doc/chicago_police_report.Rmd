@@ -21,7 +21,9 @@ In this project we attempt to investigate whether there is an association betwee
 
 # Introduction
 
-In the workforce we tend to associate higher salaries with higher levels of performance, since people who are good at their job tend to get paid more. With this study we wanted to take a look and answer an inferential question of whether a police staff member's salary influences the number of complaints per year they receive.
+The recent social climate has made us more aware of the systemic problems embedded within police departments; especially in the context of police interaction with members of the public. It is important to examine what factors are contributing to the misconduct of police staff members. Police staff misconduct is documented in complaints lodged against members of the police staff which is publicly available information. We are interested in seeing what factors contribute to the number of complaints a police staff member receives in a year. Based on previous research (Nesvisky, 2007), demonstrating a relationship between arrest rates and police staff member salary, we suspect that salary may also be associated the number of complaints. Research in the social sciences, also nudges us to consider demographic variables as potentially confounding variables. This is because demographic variables could impact both our explanatory (e.g. women on average earn less than their male counterparts) and response variables (e.g. women in policing receive less complaints). Therefore, it is important to account for the effects of demographic variables when examining the relationship between number of complaints and salary.
+
+In summary, we aim to answer the main inferential question of whether a police staff member's salary influences the number of complaints they receive per year.
 
 # Methods
 
@@ -82,12 +84,12 @@ $$ \texttt{complaints_per_year}_i = \beta_0 + \beta_1 \times \texttt{salary_scal
 The coefficents of this model and their p-values are presented below:
 
 ```{r}
-knitr::kable(readRDS('../results/salary_reg.rds'), caption = "Table 1. Example text")
+knitr::kable(readRDS('../results/salary_reg.rds'), caption = "Table 1. Simple Linear Regression Model Coefficients and p-values.")
 ```
 
 Our line of regression can also be visualized by the graph below:
 
-```{r regression visualization, echo = FALSE, out.width = '75%', out.height = '75%', fig.cap="Figure 7. Example text", out.width = "75%"}
+```{r regression visualization, echo = FALSE, out.width = '75%', out.height = '75%', fig.cap="Figure 7. Scatterplot with Line of Regression in Blue", out.width = "75%"}
 knitr::include_graphics('../results/salary_reg.png')
 ```
 
@@ -106,7 +108,7 @@ $$ \texttt{complaints_per_year}_i = \beta_0 + \beta_1 \times \texttt{salary_scal
 The coefficents of this model and their p-values are presented below:
 
 ```{r}
-knitr::kable(readRDS('../results/salary_gender_reg.rds'), caption = "Table 2. Example text")
+knitr::kable(readRDS('../results/salary_gender_reg.rds'), caption = "Table 2. Multivariable Regression Model considering effect of Gender.")
 ```
 
 Our third and final model includes all demographic terms(i.e. gender, race and age) and is described by the equation below:
@@ -116,15 +118,17 @@ $$ \texttt{complaints_per_year}_i = \beta_0 + \beta_1 \times \texttt{salary_scal
 The coefficents of this model and their p-values are presented below:
 
 ```{r}
-knitr::kable(readRDS('../results/salary_demographics_reg.rds'), caption = "Table 3. Example text")
+knitr::kable(readRDS('../results/salary_demographics_reg.rds'), caption = "Table 3. Multivariable Regression Model considering effect of all demographic variable.")
 ```
 
 As seen above, the additional demographic variables have statistically significant coefficients, which implies that they have an effect on the number of complaints. Therefore we should take these potentially confounding variables into account to control for their effect on the number of complaints. This would allow us to examine the true relationship between salary and number of complaints while considering these variables. As per Tiff's suggestions, we will be evaluating the performance of these models in the next iteration of our project once we have learned this material in 561. We plan to determine which model can best describe our data.
 
-We also acknowledge that our data does not fit all the assumptions of linear regression, therefore, we will be interpreting the results of our analysis with caution. The independence assumption is likely not met as individual officers may appear in more than one year. Additionally, it appears that the assumption of linearity is violated based on Figure 7.
+We also acknowledge that our data does not fit all the assumptions of linear regression, therefore, we will be interpreting the results of our analysis with caution. The assumption of independence is likely not met as individual officers may appear in more than one year. Additionally, it appears that the assumption of linearity is also violated based on Figure 7 as there appears to be a curvilinear relationship rather than a linear relationship between our variables of interest.
 
 # References
 
 Irizarry, R. (2020, November 16). Introduction to Data Science. Retrieved November 28, 2020, from <https://rafalab.github.io/dsbook/regression.html>
 
 Invisible Institute. (2017). Invinst/chicago-police-data. Retrieved November 28, 2020, from <https://github.com/invinst/chicago-police-data>
+
+Nesvisky, M. (2007). Police Pay and Performance. Retrieved November 28, 2020, from https://www.nber.org/digest/jan07/police-pay-and-performance
