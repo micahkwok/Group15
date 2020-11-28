@@ -118,7 +118,7 @@ $$ \texttt{complaints_per_year}_i = \beta_0 + \beta_1 \times \texttt{salary_scal
 The coefficents of this model and their p-values are presented below:
 
 ```{r}
-knitr::kable(readRDS('../results/salary_demographics_reg.rds'), caption = "Table 3. Multivariable Regression Model considering effect of all demographic variable.")
+knitr::kable(readRDS('../results/salary_demographics_reg.rds'), caption = "Table 3. Multivariable Regression Model considering effect of all demographic variables.")
 ```
 
 As seen above, the additional demographic variables have statistically significant coefficients, which implies that they have an effect on the number of complaints. Therefore we should take these potentially confounding variables into account to control for their effect on the number of complaints. This would allow us to examine the true relationship between salary and number of complaints while considering these variables. As per Tiff's suggestions, we will be evaluating the performance of these models in the next iteration of our project once we have learned this material in 561. We plan to determine which model can best describe our data.
