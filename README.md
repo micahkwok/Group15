@@ -14,22 +14,22 @@ The final report can be found <link to final report>
 In order to replicate our analysis, clone this GitHub repository, ensure you have installed all the dependencies below, then run the following commands at the command lin/terminal from the project directory. 
 
 ```
-# download data
-python src/download_data.py download_data.py --url=https://github.com/invinst/chicago-police-data/blob/master/data/unified_data/salary/salary-ranks_2002-2017_2017-09.csv.gz?raw=true --path=data/complaints.csv
-python src/download_data.py download_data.py --url=https://github.com/invinst/chicago-police-data/blob/master/data/unified_data/complaints/complaints-accused.csv.gz?raw=true --path=data/accused.csv
-python src/download_data.py download_data.py --url=https://github.com/invinst/chicago-police-data/blob/master/data/unified_data/complaints/complaints-complaints.csv.gz?raw=true --path=data/salary.csv
-python src/download_data.py download_data.py --url=https://github.com/invinst/chicago-police-data/blob/master/data/unified_data/profiles/final-profiles.csv.gz?raw=true --path=data/demographics
+# Download data
+python src/download_data.py download_data.py --url=https://github.com/invinst/chicago-police-data/blob/master/data/unified_data/salary/salary-ranks_2002-2017_2017-09.csv.gz?raw=true --path=data/raw/complaints.csv
+python src/download_data.py download_data.py --url=https://github.com/invinst/chicago-police-data/blob/master/data/unified_data/complaints/complaints-accused.csv.gz?raw=true --path=data/raw/accused.csv
+python src/download_data.py download_data.py --url=https://github.com/invinst/chicago-police-data/blob/master/data/unified_data/complaints/complaints-complaints.csv.gz?raw=true --path=data/raw/salary.csv
+python src/download_data.py download_data.py --url=https://github.com/invinst/chicago-police-data/blob/master/data/unified_data/profiles/final-profiles.csv.gz?raw=true --path=data/raw/demographics.csv
 
-# clean / preprocess data
-Rscript src/read_preprocess_data.R --file_path=data --out_dir=data
+# Clean / preprocess data
+Rscript src/read_preprocess_data.R --file_path=data/raw --out_dir=data/processed
 
-# create exploritory data analysis figures and write to file
-Rscript src/generate_EDA_figures.R --all_data=data/complaints_all_staff --police_data=data/complaints_police --out_dir=eda/images
+# Create exploritory data analysis figures and write to file
+Rscript src/generate_EDA_figures.R --all_data=data/processed/complaints_all_staff.csv --police_data=data/processed/complaints_police.csv --out_dir=eda/images
 
-# run statistical analysis 
-Rscript src/linear_regression_analysis --file_path=data --out_dir=results
+# Run statistical analysis 
+Rscript src/linear_regression_analysis --file_path=data/processed --out_dir=results
 
-# render final report?
+# Render final report?
 ```
 
 ## Dependencies
