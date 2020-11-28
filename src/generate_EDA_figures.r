@@ -7,8 +7,8 @@ Saves the plots as a png file.
 Usage: src/generate_EDA_figures.r --all_data=<all_data> --police_data=<police_data> --out_dir=<out_dir>
   
 Options:
---all_data=<all_data>     Path (including filename) to prerocessed full dataset
---police_data=<police_data>     Path (including filename) to prerocessed subsetted data of Police Officers
+--all_data=<all_data>     Path (including filename) to preprocessed full dataset
+--police_data=<police_data>     Path (including filename) to preprocessed subsetted data of Police Officers
 --out_dir=<out_dir> Path to directory where the plots should be saved
 " -> doc
 
