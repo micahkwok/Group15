@@ -82,8 +82,8 @@ complaints_all_staff %>%
 complaints_police %>%
     ggplot(aes(x = salary)) + 
     geom_histogram() + 
-    ggtitle("Distribution of Police Officer Salary (2005-2015)") + 
-    labs(x = "Salary", y = "Count") + 
+    ggtitle("Distribution of Police Officer Salary") + 
+    labs(x = "Salary", y = "Count", subtitle = "(2005-2015)") + 
     scale_x_continuous(labels = scales::label_dollar()) +
     ggsave(paste0(out_dir,"/police_salary_dist.png"))
 
