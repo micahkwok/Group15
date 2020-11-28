@@ -63,7 +63,7 @@ complaints_all_staff %>%
     summarize(n = sum(complaints_per_year)) %>%
     ggplot(aes(x = n)) +
     labs(x = "Number of Complaints", y = "Count") + 
-    ggtitle("Total Complaints per Officer (2005-2015)") +
+    ggtitle("Total Complaints per Police Staff (2005-2015)") +
     geom_histogram(bins = 20) +
     facet_wrap(~year, nrow=3) +
     ggsave(paste0(out_dir,"/faceted_histogram.png"))
@@ -78,12 +78,12 @@ complaints_all_staff %>%
     geom_col() +
     ggsave(paste0(out_dir,"/complaints_by_rank.png"))
 
-#Police Officer Salary Distribution
-complaints_police %>% 
+#Police Officer Salary Distribution (2015)
+complaints_police %>%
     ggplot(aes(x = salary)) + 
     geom_histogram() + 
-    ggtitle("Distribution of Police Officer Salary") + 
-    labs(x = "Salary") + 
+    ggtitle("Distribution of Police Officer Salary (2005-2015)") + 
+    labs(x = "Salary", y = "Count") + 
     scale_x_continuous(labels = scales::label_dollar()) +
     ggsave(paste0(out_dir,"/police_salary_dist.png"))
 
@@ -115,7 +115,7 @@ complaints_police %>% filter(year == 2015) %>% group_by(year, race) %>%
     add_count(race) %>% 
     ggplot(aes(y = reorder(race,-n))) + 
     geom_bar() + facet_wrap(~year) + 
-    ggtitle("2015 Breakdown of Police Officer Race") +
+    ggtitle("2015 Police Officer Race Breakdown") +
     labs(x = "Count" , y = "Race") + 
     ggsave(paste0(out_dir,"/police_race.png"))
 
