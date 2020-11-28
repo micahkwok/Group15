@@ -1,4 +1,4 @@
-Project Proposal: Chicago Police Data Analysis
+# Project Proposal: Chicago Police Data Analysis
 
 ### 1. Working Dataset
 
