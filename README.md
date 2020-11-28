@@ -24,7 +24,7 @@ python src/download_data.py download_data.py --url=https://github.com/invinst/ch
 Rscript src/read_preprocess_data.R --file_path=data/raw --out_dir=data/processed
 
 # Create exploritory data analysis figures and write to file
-Rscript src/generate_EDA_figures.R --all_data=data/processed/complaints_all_staff --police_data=data/processed/complaints_police --out_dir=eda/images
+Rscript src/generate_EDA_figures.R --all_data=data/processed/complaints_all_staff.csv --police_data=data/processed/complaints_police.csv --out_dir=eda/images
 
 # Run statistical analysis 
 Rscript src/linear_regression_analysis --file_path=data/processed --out_dir=results
