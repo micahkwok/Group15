@@ -123,7 +123,7 @@ knitr::kable(readRDS('../results/salary_demographics_reg.rds'), caption = "Table
 
 As seen above, the additional demographic variables have statistically significant coefficients, which implies that they have an effect on the number of complaints. Therefore we should take these potentially confounding variables into account to control for their effect on the number of complaints. This would allow us to examine the true relationship between salary and number of complaints while considering these variables. As per Tiff's suggestions, we will be evaluating the performance of these models in the next iteration of our project once we have learned this material in 561. We plan to determine which model can best describe our data.
 
-We also acknowledge that our data does not fit all the assumptions of linear regression, therefore, we will be interpreting the results of our analysis with caution. The assumption of independence is likely not met as individual officers may appear in more than one year. Additionally, it appears that the assumption of linearity is also violated based on Figure 7 as there appears to be a curvilinear relationship rather than a linear relationship between our variables of interest.
+We also acknowledge that our data does not fit all the assumptions of linear regression, therefore, we will be interpreting the results of our analysis with caution. The assumption of independence is likely not met as individual officers may appear in more than one year. Additionally, it appears that the assumption of linearity is also violated based on Figure 9 as there appears to be a curvilinear relationship rather than a linear relationship between our variables of interest.
 
 # References
 
