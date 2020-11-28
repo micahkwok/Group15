@@ -108,7 +108,7 @@ complaints_police %>% filter(year == 2015) %>% group_by(year, gender) %>%
     geom_bar() +
     ggtitle("2015 Police Officer Gender Breakdown") +
     labs(x = "Gender", y = "Count") +
-    ggsave(paste0(out_dir,"/police_gender.png"), width = 5, height = 7)
+    ggsave(paste0(out_dir,"/police_gender.png"))
 
 # Race Bar Chart for 2015
 complaints_police %>% filter(year == 2015) %>% group_by(year, race) %>% 
