@@ -26,6 +26,11 @@ main <- function(all_data, police_data , out_dir) {
 complaints_all_staff <- read_csv(all_data)
 complaints_police <- read_csv(police_data)    
 
+# create out directory
+try({
+  dir.create(out_dir)
+})
+
 # Complaints by year
 complaints_all_staff %>% 
     group_by(year) %>%
