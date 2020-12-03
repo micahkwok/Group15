@@ -37,7 +37,7 @@ results: data/processed src/linear_regression_analysis.R
 
 # write the report
 doc/chicago_police_report.html: eda/images results doc/chicago_police_report.Rmd doc/references.bib 
-    Rscript -e "rmarkdown::render('doc/chicago_police_report.Rmd')"
+	Rscript -e "rmarkdown::render('doc/chicago_police_report.Rmd')"
 
 # remove analysis files    
 clean: 
