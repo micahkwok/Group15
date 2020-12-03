@@ -8,7 +8,7 @@
 # example usage:
 # make all
 
-all: doc/chicago_police_report.html 
+all: results eda/images doc/chicago_police_report.html 
 
 # Download data
 data/raw/complaints.csv: src/download_data.py
@@ -24,11 +24,11 @@ data/raw/demographics.csv: src/download_data.py
 	python src/download_data.py --url=https://github.com/invinst/chicago-police-data/blob/master/data/unified_data/profiles/final-profiles.csv.gz?raw=true --path=data/raw/demographics.csv
 
 # Clean / preprocess data
-data/processed: data/raw src/read_preprocess_data.R 
+data/processed: data/raw/complaints.csv data/raw/accused.csv data/raw/salary.csv data/raw/demographics.csv src/read_preprocess_data.R 
 	Rscript src/read_preprocess_data.R --file_path=data/raw --out_dir=data/processed
 
 # Create exploritory data analysis figures and write to file
-eda/images: data/processed/complaints_all_staff.csv data/processed/complaints_police.csv src/generate_EDA_figures.R
+eda/images: data/processed src/generate_EDA_figures.R
 	Rscript src/generate_EDA_figures.R --all_data=data/processed/complaints_all_staff.csv --police_data=data/processed/complaints_police.csv --out_dir=eda/images
 
 # Run statistical analysis 
@@ -36,5 +36,12 @@ results: data/processed src/linear_regression_analysis.R
 	Rscript src/linear_regression_analysis.R --file_path=data/processed --out_dir=results
 
 # write the report
-doc/chicago_police_report.html: doc/chicago_police_report.Rmd doc/references.bib eda/images results
+doc/chicago_police_report.html: eda/images results doc/chicago_police_report.Rmd doc/references.bib 
     Rscript -e "rmarkdown::render('doc/chicago_police_report.Rmd')"
+
+# remove analysis files    
+clean: 
+	rm -rf data
+	rm -rf results
+	rm -rf eda/images
+	rm -rf doc/chicago_police_report.html

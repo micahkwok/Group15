@@ -16,7 +16,7 @@ opt <- docopt(document)
 main <- function(file_path, out_dir) {
 
 # Load complaints dataframe 
-complaints_police <- read_csv(file_path)
+complaints_police <- read_csv(paste0(file_path, "/complaints_police.csv"))
 
 # Scale salaries for regression
 complaints_police <- complaints_police %>% 

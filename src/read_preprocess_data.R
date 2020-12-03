@@ -108,14 +108,19 @@ main <- function(file_path, out_dir) {
         mutate(cleaned_rank = factor(cleaned_rank, levels = rank_order)) %>%   
         # convert NAs to 0
         mutate(complaints_per_year = if_else(is.na(complaints_per_year), 0, complaints_per_year)) 
-          
-        write_csv(complaints_all_staff, paste0(out_dir, "/complaints_all_staff.csv"))
-               
-        # Create police officer dataframe for analysis  
-        complaints_police <- complaints_all_staff %>%
-        filter(cleaned_rank == "POLICE OFFICER")
-               
-        write_csv(complaints_police, paste0(out_dir,"/complaints_police.csv"))
+                      
+    # Create police officer dataframe for analysis  
+    complaints_police <- complaints_all_staff %>%
+    filter(cleaned_rank == "POLICE OFFICER")
+
+    # try to create directory
+    try({
+    dir.create(out_dir)
+    })
+
+    # write to .csv
+    write_csv(complaints_all_staff, paste0(out_dir, "/complaints_all_staff.csv"))         
+    write_csv(complaints_police, paste0(out_dir,"/complaints_police.csv"))
 }
 
 main(opt$file_path, opt$out_dir)
