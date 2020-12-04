@@ -21,7 +21,7 @@ In this project we attempt to investigate whether there is an association betwee
 
 # Introduction
 
-The recent social climate has made us more aware of the systemic problems embedded within police departments; especially in the context of police interaction with members of the public. It is important to examine what factors are contributing to the misconduct of police staff members. Police staff misconduct is documented in complaints lodged against members of the police staff which is publicly available information. We are interested in seeing what factors contribute to the number of complaints a police staff member receives in a year. Based on previous research (Nesvisky, 2007), demonstrating a relationship between arrest rates and police staff member salary, we suspect that salary may also be associated the number of complaints. Research in the social sciences, also nudges us to consider demographic variables as potentially confounding variables. This is because demographic variables could impact both our explanatory (e.g. women on average earn less than their male counterparts) and response variables (e.g. women in policing receive less complaints). Therefore, it is important to account for the effects of demographic variables when examining the relationship between number of complaints and salary.
+The recent social climate has made us more aware of the systemic problems embedded within police departments; especially in the context of police interaction with members of the public. It is important to examine what factors are contributing to the misconduct of police staff members. Police staff misconduct is documented in complaints lodged against members of the police staff which is publicly available information. We are interested in seeing what factors contribute to the number of complaints a police staff member receives in a year. Based on previous research [@policePay], demonstrating a relationship between arrest rates and police staff member salary, we suspect that salary may also be associated the number of complaints. Research in the social sciences, also nudges us to consider demographic variables as potentially confounding variables. This is because demographic variables could impact both our explanatory (e.g. women on average earn less than their male counterparts) and response variables (e.g. women in policing receive less complaints). Therefore, it is important to account for the effects of demographic variables when examining the relationship between number of complaints and salary.
 
 In summary, we aim to answer the main inferential question of whether a police staff member's salary influences the number of complaints they receive per year.
 
@@ -29,7 +29,7 @@ In summary, we aim to answer the main inferential question of whether a police s
 
 ## Dataset
 
-The original datasets and documents are sourced from the Chicago Police Department (CPD), Civillian Office of Police Accountability (COPA), the Independent Police Review Authority (IPRA), or the City of Chicago. However, we are building off of data that has been cleaned and matched from a [repository](https://github.com/invinst/chicago-police-data) maintained by the [Invisible Institute](https://invisible.institute/introduction). We have used a subset of the data from the years 2005 to 2015.
+The original datasets and documents are sourced from the Chicago Police Department (CPD), Civillian Office of Police Accountability (COPA), the Independent Police Review Authority (IPRA), or the City of Chicago. However, we are building off of data that has been cleaned and matched from a [repository](https://github.com/invinst/chicago-police-data) maintained by the Invisible Institute [@iInstitute]. We have used a subset of the data from the years 2005 to 2015.
 
 ## Analysis
 
@@ -127,8 +127,3 @@ We also acknowledge that our data does not fit all the assumptions of linear reg
 
 # References
 
-Irizarry, R. (2020, November 16). Introduction to Data Science. Retrieved November 28, 2020, from <https://rafalab.github.io/dsbook/regression.html>
-
-Invisible Institute. (2017). Invinst/chicago-police-data. Retrieved November 28, 2020, from <https://github.com/invinst/chicago-police-data>
-
-Nesvisky, M. (2007). Police Pay and Performance. Retrieved November 28, 2020, from https://www.nber.org/digest/jan07/police-pay-and-performance
