@@ -92,19 +92,20 @@ complaints_police %>%
     scale_x_continuous(labels = scales::label_dollar()) +
     ggsave(paste0(out_dir,"/police_salary_dist.png"))
 
-#Police Officer Age Dist (2015, chosen b/c a recent year that is pretty representative)
-complaints_police %>% filter(year == 2015) %>% 
-    ggplot(aes(x = approx_age)) + geom_histogram(bins = 20) +
-    ggtitle("Approximate Age of Police Officers in 2015") +
-    labs(x = "Approximate Age", y = "Count") +
-    ggsave(paste0(out_dir,"/police_age_dist.png"))
+#Histogram function - need to create tests    
+create_histogram <- function(year_input, x_input, title, x_lab, y_lab, file_name) {
+    complaints_police %>% filter(year == year_input) %>% 
+        ggplot(aes(x = {{x_input}})) + geom_histogram(bins = 20) +
+        ggtitle(title) +
+        labs(x = x_lab, y = y_lab) +
+        ggsave(paste0(out_dir,file_name))
+}    
 
-#Distribution of years of service in 2015
-complaints_police %>% filter( year == 2015) %>% 
-    ggplot(aes(x = approx_years_service)) + geom_histogram(bins = 20) +
-    ggtitle("Approximate Years of Service of Police Officers in 2015") +
-    labs(x = "Approximate Years of Service", y = "Count") +
-    ggsave(paste0(out_dir,"/police_exp_dist.png"))   
+#Police Officer Age Dist (2015, chosen b/c a recent year that is pretty representative)
+create_histogram(2015, approx_age, 'Approximate Age of Police Officers in 2015', 'Approximate Age', 'Count', '/police_age_dist.png')
+
+#Distribution of years of service in 2015    
+create_histogram(2015, approx_years_service, 'Approximate Years of Service of Police Officers in 2015', 'Approximate Years of Service', 'Count', '/police_exp_dist.png')    
 
 # Gender Bar Chart 2015
 complaints_police %>% filter(year == 2015) %>% group_by(year, gender) %>% 
