@@ -1,3 +1,7 @@
+# Docker file for the Chicago Police Department complaint analysis
+# Author: Ela Bandari, Elanor Boyle-Stanley, Micah Kwok
+# Date: December 10, 2020
+
 FROM rocker/tidyverse
 
 RUN apt-get update
