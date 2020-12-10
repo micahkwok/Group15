@@ -39,7 +39,7 @@ Simple and multivariable linear regression models were used to determine if ther
 
 # Results and Discussion
 
-To better answer whether a police staff member's salary influences their number of complaints per year, we found it helpful to start with a high level view of the Chicago Police Data and looked at the number of complaints per year. From 2007 onwards complaints per year have actually been falling, with a portion of that most likely attributed to declining total staff numbers. Instead, if we look at the complaints per year per officer in Figure 1, we see that the overall trend has not really changed from year to year.
+To better answer whether a police staff's salary influences the number of complaints they receive per year, we found it helpful to start with a high level view of the Chicago Police Data and looked at the number of complaints per year. From 2007 onward complaints per year have actually been falling, with a portion of that most likely attributed to declining total staff numbers. Instead, if we look at the complaints per year per officer in Figure 1, we see that the overall trend has not really changed from year to year.
 
 ```{r faceted histogram, echo = FALSE, out.width = '75%', out.height = '75%', fig.cap="Figure 1. Complaints per officer faceted by year"}
 knitr::include_graphics('../eda/images/faceted_histogram.png')
