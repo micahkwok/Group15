@@ -71,7 +71,9 @@ complaints_all_staff %>%
     labs(x = "Number of Complaints", y = "Count") + 
     ggtitle("Total Complaints per Police Staff (2005-2015)") +
     geom_histogram(bins = 20) +
-    facet_wrap(~year, nrow=3) +
+    facet_wrap(~year, nrow=3) + 
+    theme(axis.title = element_text(size = 14),
+        plot.title = element_text(size = 20)) +
     ggsave(paste0(out_dir,"/faceted_histogram.png"))
 
 # Complaints by officer rank
@@ -91,6 +93,9 @@ complaints_police %>%
     ggtitle("Distribution of Police Officer Salary") + 
     labs(x = "Salary", y = "Count", subtitle = "(2005-2015)") + 
     scale_x_continuous(labels = scales::label_dollar()) +
+    theme(axis.title = element_text(size = 14),
+        axis.text = element_text(size=12),
+        plot.title = element_text(size = 20)) +
     ggsave(paste0(out_dir,"/police_salary_dist.png"))
 
 #Create Histogram function    
