@@ -38,7 +38,7 @@ docker run --rm -v "PATH-ON-YOUR-COMPUTER":/home/rstudio/CPD elanor333/cpd:v0.5.
 ```
 On a non-Windows machine:
 ```
-docker run --rm -v /$(pwd):/home/rstudio/CPD elanor333/cpd:v0.5.0 make -C home/rstudio/CPD all
+docker run --rm -v /$(pwd):/home/rstudio/CPD elanor333/cpd:v0.5.0 make -C home/rstudio/CPD clean
 ```
 
 **2. Without using Docker**
@@ -52,7 +52,7 @@ To reset the repo to a clean state, with no intermediate or results files, run t
 make clean
 ```
 ## Makefile Dependency Diagram
-![](makefile.png)
+![](makefile.png?raw=true)
 
 ## Dependencies
 - Python 3.8.3 and Python packages:
@@ -67,6 +67,7 @@ make clean
     - lubridate==1.7.9 
     - GGally==2.0.0
     - broom==0.7.0
+    - testthat==3.0.0.9000
 
 
 # References
