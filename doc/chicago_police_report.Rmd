@@ -1,5 +1,7 @@
 ---
-title: "Chicago Police Report"
+title: "Relationship of salary and complaints received by police officers"
+author: "Ela Bandari, Elanor Boyle-Stanley, Micah Kwok"
+date: "December 12, 2020"
 bibliography: references.bib
 output: 
   html_document:
@@ -10,10 +12,6 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 library(knitr)
 ```
-
-# Chicago Police Data Analysis
-
--   Authors: Ela Bandari, Elanor Boyle-Stanley, Micah Kwok
 
 # Summary
 
@@ -31,13 +29,17 @@ In summary, we aim to answer the main inferential question of whether a police s
 
 The original datasets and documents are sourced from the Chicago Police Department (CPD), Civillian Office of Police Accountability (COPA), the Independent Police Review Authority (IPRA), or the City of Chicago. However, we are building off of data that has been cleaned and matched from a [repository](https://github.com/invinst/chicago-police-data) maintained by the Invisible Institute [@iInstitute]. We have used a subset of the data from the years 2005 to 2015.
 
+## Data Processing
+
+
+
 ## Analysis
 
 Simple and multivariable linear regression models were used to determine if there was an association between the number of complaints an officer receives per year and the officer's salary. Number of complaints, salary and officer demographic variables (i.e. gender, race and age) were the variables used from the original dataset. The R programming language [@R] and the following R packages: tidyverse [@tidyverse], doctopt [@docopt], knitr [@knitr], janitor [@janitor], lubridate [@lubridate], GGally [@GGally], broom [@broom] and testthat [@testthat] were used to conduct these analyses. The code used to perform the analysis and create this report can be found here: <https://github.com/UBC-MDS/CPD>
 
 # Results and Discussion
 
-To better answer whether a police staff member's salary influences their number of complaints per year, we found it helpful to start with a high level view of the Chicago Police Data and looked at the number of complaints per year. From 2007 onwards complaints per year have actually been falling, with a portion of that most likely attributed to declining total staff numbers. Instead, if we look at the complaints per year per officer in Figure 1, we see that the overall trend has not really changed from year to year.
+To better answer whether a police staff's salary influences the number of complaints they receive per year, we found it helpful to start with a high level view of the Chicago Police Data and looked at the number of complaints per year. From 2007 onward complaints per year have actually been falling, with a portion of that most likely attributed to declining total staff numbers. Instead, if we look at the complaints per year per officer in Figure 1, we see that the overall trend has not really changed from year to year.
 
 ```{r faceted histogram, echo = FALSE, out.width = '75%', out.height = '75%', fig.cap="Figure 1. Complaints per officer faceted by year"}
 knitr::include_graphics('../eda/images/faceted_histogram.png')
