@@ -1,5 +1,7 @@
 ---
-title: "Chicago Police Report"
+title: "Relationship of salary and complaints received by police officers"
+author: "Ela Bandari, Elanor Boyle-Stanley, Micah Kwok"
+date: "December 12, 2020"
 bibliography: references.bib
 output: 
   html_document:
@@ -10,10 +12,6 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 library(knitr)
 ```
-
-# Chicago Police Data Analysis
-
--   Authors: Ela Bandari, Elanor Boyle-Stanley, Micah Kwok
 
 # Summary
 
@@ -30,6 +28,10 @@ In summary, we aim to answer the main inferential question of whether a police s
 ## Dataset
 
 The original datasets and documents are sourced from the Chicago Police Department (CPD), Civillian Office of Police Accountability (COPA), the Independent Police Review Authority (IPRA), or the City of Chicago. However, we are building off of data that has been cleaned and matched from a [repository](https://github.com/invinst/chicago-police-data) maintained by the Invisible Institute [@iInstitute]. We have used a subset of the data from the years 2005 to 2015.
+
+## Data Processing
+
+
 
 ## Analysis
 
