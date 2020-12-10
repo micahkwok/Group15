@@ -8,7 +8,8 @@ RUN apt-get update -qq && install2.r --error \
     GGally \
     broom \
     docopt \
-    lubridate
+    lubridate \
+    testthat
 
 # install libxt6
 RUN apt-get install -y --no-install-recommends libxt6
