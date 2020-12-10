@@ -21,7 +21,7 @@ In this project we attempt to investigate whether there is an association betwee
 
 # Introduction
 
-The recent social climate has made us more aware of the systemic problems embedded within police departments; especially in the context of police interaction with members of the public. It is important to examine what factors are contributing to the misconduct of police staff members. Police staff misconduct is documented in complaints lodged against members of the police staff which is publicly available information. We are interested in seeing what factors contribute to the number of complaints a police staff member receives in a year. Based on previous research (Nesvisky, 2007), demonstrating a relationship between arrest rates and police staff member salary, we suspect that salary may also be associated the number of complaints. Research in the social sciences, also nudges us to consider demographic variables as potentially confounding variables. This is because demographic variables could impact both our explanatory (e.g. women on average earn less than their male counterparts) and response variables (e.g. women in policing receive less complaints). Therefore, it is important to account for the effects of demographic variables when examining the relationship between number of complaints and salary.
+The recent social climate has made us more aware of the systemic problems embedded within police departments; especially in the context of police interaction with members of the public. It is important to examine what factors are contributing to the misconduct of police staff members. Police staff misconduct is documented in complaints lodged against members of the police staff which is publicly available information. We are interested in seeing what factors contribute to the number of complaints a police staff member receives in a year. Based on previous research [@policePay], demonstrating a relationship between arrest rates and police staff member salary, we suspect that salary may also be associated the number of complaints. Research in the social sciences, also nudges us to consider demographic variables as potentially confounding variables. This is because demographic variables could impact both our explanatory (e.g. women on average earn less than their male counterparts) and response variables (e.g. women in policing receive less complaints). Therefore, it is important to account for the effects of demographic variables when examining the relationship between number of complaints and salary.
 
 In summary, we aim to answer the main inferential question of whether a police staff member's salary influences the number of complaints they receive per year.
 
@@ -29,21 +29,15 @@ In summary, we aim to answer the main inferential question of whether a police s
 
 ## Dataset
 
-The original datasets and documents are sourced from the Chicago Police Department (CPD), Civillian Office of Police Accountability (COPA), the Independent Police Review Authority (IPRA), or the City of Chicago. However, we are building off of data that has been cleaned and matched from a [repository](https://github.com/invinst/chicago-police-data) maintained by the [Invisible Institute](https://invisible.institute/introduction). We have used a subset of the data from the years 2005 to 2015.
+The original datasets and documents are sourced from the Chicago Police Department (CPD), Civillian Office of Police Accountability (COPA), the Independent Police Review Authority (IPRA), or the City of Chicago. However, we are building off of data that has been cleaned and matched from a [repository](https://github.com/invinst/chicago-police-data) maintained by the Invisible Institute [@iInstitute]. We have used a subset of the data from the years 2005 to 2015.
 
 ## Analysis
 
-Simple and multivariable linear regression models were used to determine if there was an association between the number of complaints an officer receives per year and the officer's salary. Number of complaints, salary and officer demographic variables (i.e. gender, race and age) were the variables used from the original dataset. The R programming language [@R] and the following R packages: tidyverse [@tidyverse], doctopt [@docopt], knitr [@knitr], janitor [@janitor], lubridate [@lubridate], GGally [@GGally], broom [@broom] were used to conduct these analyses. The code used to perform the analysis and create this report can be found here: <https://github.com/UBC-MDS/CPD>
+Simple and multivariable linear regression models were used to determine if there was an association between the number of complaints an officer receives per year and the officer's salary. Number of complaints, salary and officer demographic variables (i.e. gender, race and age) were the variables used from the original dataset. The R programming language [@R] and the following R packages: tidyverse [@tidyverse], doctopt [@docopt], knitr [@knitr], janitor [@janitor], lubridate [@lubridate], GGally [@GGally], broom [@broom] and testthat [@testthat] were used to conduct these analyses. The code used to perform the analysis and create this report can be found here: <https://github.com/UBC-MDS/CPD>
 
 # Results and Discussion
 
-To better answer whether a police staff member's salary influences their number of complaints per year, we found it helpful to start with a high level view of the Chicago Police Data and looked at the number of complaints per year.
-
-```{r complaints images, echo = FALSE, out.width = '45%', out.height = '45%', fig.cap=c("Figure 1. Complaints per year (2005-2015)", "Figure 2. Police staff per year (2005-2015)"), fig.show='asis'}
-knitr::include_graphics(c('../eda/images/complaints_by_year.png','../eda/images/staff_by_year.png'))
-```
-
-We see that the complaints per year have been falling from 2007 onwards in Figure 1, but a portion of it can be contributed to declining total staff numbers as seen in Figure 2. Instead, if we look at the complaints per year per officer in Figure 3, we see that the overall trend has not really changed from year to year.
+To better answer whether a police staff member's salary influences their number of complaints per year, we found it helpful to start with a high level view of the Chicago Police Data and looked at the number of complaints per year. From 2007 onwards complaints per year have actually been falling, with a portion of that most likely attributed to declining total staff numbers. Instead, if we look at the complaints per year per officer in Figure 3, we see that the overall trend has not really changed from year to year.
 
 ```{r faceted histogram, echo = FALSE, out.width = '65%', out.height = '65%', fig.cap="Figure 3. Complaints per officer faceted by year"}
 knitr::include_graphics('../eda/images/faceted_histogram.png')
@@ -57,13 +51,13 @@ knitr::include_graphics(c('../eda/images/complaints_by_rank.png','../eda/images/
 
 Taking a closer look at this Police Officer group, we found that their salary ranged from \$36,984 to \$122,100 with a mean of \$73,773 from the years 2005 to 2015. In terms of age, the average police officer in 2015 was about 41 years old and this was a relatively normal distribution. These officers had about 12 years of service but this distribution was harder to characterize with a number of officers having less than seven years of service.
 
-```{r police officer distribution, echo = FALSE, out.width = '45%', out.height = '45%', fig.cap= "Figure 6. Distributions of Police Officer attributes in 2015", fig.show = 'hold', fig.align = 'center'}
+```{r police officer distribution, echo = FALSE, out.width = '45%', out.height = '45%', fig.cap= "Figure 6. Distributions of Police Officer attributes in 2015", fig.show = 'hold', fig.align = 'left'}
 knitr::include_graphics(c('../eda/images/police_age_dist.png','../eda/images/police_exp_dist.png'))
 ```
 
 In the gender and race bar charts we can see that the majority of police officers are male and white. By looking at just one year, 2015, we are able to prevent double-counting and get an understanding of the distributions of the Police Officer sub-group. We chose 2015 as it was relatively recent and represented the other years quite well.
 
-```{r police officer demographics, echo = FALSE, out.width = '45%', out.height = '45%', fig.cap="Figure 7. Demographics of Police Officers in 2015", fig.show = 'hold', fig.align = 'center'}
+```{r police officer demographics, echo = FALSE, out.width = '45%', out.height = '45%', fig.cap="Figure 7. Demographics of Police Officers in 2015", fig.show = 'hold', fig.align = 'left'}
 knitr::include_graphics(c('../eda/images/police_gender.png','../eda/images/police_race.png'))
 ```
 
@@ -127,8 +121,3 @@ We also acknowledge that our data does not fit all the assumptions of linear reg
 
 # References
 
-Irizarry, R. (2020, November 16). Introduction to Data Science. Retrieved November 28, 2020, from <https://rafalab.github.io/dsbook/regression.html>
-
-Invisible Institute. (2017). Invinst/chicago-police-data. Retrieved November 28, 2020, from <https://github.com/invinst/chicago-police-data>
-
-Nesvisky, M. (2007). Police Pay and Performance. Retrieved November 28, 2020, from https://www.nber.org/digest/jan07/police-pay-and-performance
