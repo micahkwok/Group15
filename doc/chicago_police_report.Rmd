@@ -13,7 +13,7 @@ library(knitr)
 
 # Chicago Police Data Analysis
 
--   authors: Ela Bandari, Elanor Boyle-Stanley, Micah Kwok
+-   Authors: Ela Bandari, Elanor Boyle-Stanley, Micah Kwok
 
 # Summary
 
@@ -37,33 +37,22 @@ Simple and multivariable linear regression models were used to determine if ther
 
 # Results and Discussion
 
-To better answer whether a police staff member's salary influences their number of complaints per year, we found it helpful to start with a high level view of the Chicago Police Data and looked at the number of complaints per year. From 2007 onwards complaints per year have actually been falling, with a portion of that most likely attributed to declining total staff numbers. Instead, if we look at the complaints per year per officer in Figure 3, we see that the overall trend has not really changed from year to year.
+To better answer whether a police staff member's salary influences their number of complaints per year, we found it helpful to start with a high level view of the Chicago Police Data and looked at the number of complaints per year. From 2007 onwards complaints per year have actually been falling, with a portion of that most likely attributed to declining total staff numbers. Instead, if we look at the complaints per year per officer in Figure 1, we see that the overall trend has not really changed from year to year.
 
-```{r faceted histogram, echo = FALSE, out.width = '65%', out.height = '65%', fig.cap="Figure 3. Complaints per officer faceted by year"}
+```{r faceted histogram, echo = FALSE, out.width = '75%', out.height = '75%', fig.cap="Figure 1. Complaints per officer faceted by year"}
 knitr::include_graphics('../eda/images/faceted_histogram.png')
 ```
 
-As the majority of complaints filed from 2005-2015 were against those ranked as a Police Officer, we decided to focus our study on this group of staff.
+As the majority of complaints filed from 2005-2015 were against those ranked as a Police Officer, we decided to focus our study on this group of staff. Taking a closer look at this Police Officer group, we found that their salary ranged from \$36,984 to \$122,100 with a mean of \$73,773 from the years 2005 to 2015 as shown in Figure 2. To get an understanding of the demographics of this group we chose to take observations from 2015 as it prevented double-counting, was relatively recent and represented the other years quite well. In terms of age, the average police officer in 2015 was about 41 years old and this was a relatively normal distribution. These officers had about 12 years of service but this distribution was harder to characterize with a number of officers having less than seven years of service. In terms of gender and race the majority of police officers were identified as male and white respectively. 
 
-```{r officer breakdown image, echo = FALSE, out.width = '45%', out.height = '45%', fig.cap=c("Figure 4. Total complaints from 2005-2015", "Figure 5. Police Officer salary distribution from 2005-2015")}
-knitr::include_graphics(c('../eda/images/complaints_by_rank.png','../eda/images/police_salary_dist.png'))
+```{r officer breakdown image, echo = FALSE, out.width = '75%', out.height = '75%', fig.cap=("Figure 2. Police Officer salary distribution from 2005-2015")}
+knitr::include_graphics('../eda/images/police_salary_dist.png')
 ```
 
-Taking a closer look at this Police Officer group, we found that their salary ranged from \$36,984 to \$122,100 with a mean of \$73,773 from the years 2005 to 2015. In terms of age, the average police officer in 2015 was about 41 years old and this was a relatively normal distribution. These officers had about 12 years of service but this distribution was harder to characterize with a number of officers having less than seven years of service.
-
-```{r police officer distribution, echo = FALSE, out.width = '45%', out.height = '45%', fig.cap= "Figure 6. Distributions of Police Officer attributes in 2015", fig.show = 'hold', fig.align = 'left'}
-knitr::include_graphics(c('../eda/images/police_age_dist.png','../eda/images/police_exp_dist.png'))
-```
-
-In the gender and race bar charts we can see that the majority of police officers are male and white. By looking at just one year, 2015, we are able to prevent double-counting and get an understanding of the distributions of the Police Officer sub-group. We chose 2015 as it was relatively recent and represented the other years quite well.
-
-```{r police officer demographics, echo = FALSE, out.width = '45%', out.height = '45%', fig.cap="Figure 7. Demographics of Police Officers in 2015", fig.show = 'hold', fig.align = 'left'}
-knitr::include_graphics(c('../eda/images/police_gender.png','../eda/images/police_race.png'))
-```
 
 With a better understanding of our group of interest, we generated a correlation matrix to see if there were any strong correlations between salary, age, years of service and complaints per year. While our initial inferential question focuses on salary and complaints per year, knowing that there may be more variables accounting for a change in complaints per year led us to add these other variables. From this matrix we saw a relatively small negative coefficient between salary and complaints per year and proceeded with our analysis.
 
-```{r correlation matrix image, echo = FALSE, out.width = '75%', out.height ='75%', fig.cap="Figure 8. Correlation Matrix", out.width = "75%"}
+```{r correlation matrix image, echo = FALSE, out.width = '75%', out.height ='75%', fig.cap="Figure 3. Correlation Matrix", out.width = "75%"}
 knitr::include_graphics('../eda/images/corr_matrix.png')
 ```
 
@@ -83,7 +72,7 @@ knitr::kable(readRDS('../results/salary_reg.rds'), caption = "Table 1. Simple Li
 
 Our line of regression can also be visualized by the graph below:
 
-```{r regression visualization, echo = FALSE, out.width = '75%', out.height = '75%', fig.cap="Figure 9. Scatterplot with Line of Regression in Blue", out.width = "75%"}
+```{r regression visualization, echo = FALSE, out.width = '75%', out.height = '75%', fig.cap="Figure 4. Scatterplot with Line of Regression in Blue", out.width = "75%"}
 knitr::include_graphics('../results/salary_reg.png')
 ```
 

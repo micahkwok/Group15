@@ -1,36 +1,58 @@
-# Chicago Police Dataset (CPD)
+# Chicago Police Dataset (CPD) - Complaints Analysis
 
 - authors: Ela Bandari, Elanor Boyle-Stanley, Micah Kwok
 
-Analysis of complaints received by the Chigaco Police Department from the years 2005-2015.  Investigate if there is a relationship between salary and number of complaints received.  
+Analysis of complaints received by the Chicago Police Department from the years 2005-2015.  Investigation of the relationship between salary and number of complaints received.  
 
 ## About
-Here we attempted to determine if there is a relationship between salary and number of complaints received by Police Officers working for the Chicago Police Department for the years 2005-2015, using linear regression models.  We first used a simple linear regression model, this model indicates there is a negative linear relationship between salary and number of complaints recevied.  We then expanded scope to multivariale regression models, including potentially confounding demographic variables such as age, race and gender.  Given the demographic variables had a statistically significant impact on the number of complaints, they were identified as potentially confounding variables and taken into consideration in modelling the relationship between number of complaints and salary.  We intend to continue to explore these relationship in future iterations of the project. 
+Here we attempted to determine if there is a relationship between salary and number of complaints received by Police Officers working for the Chicago Police Department for the years 2005-2015, using linear regression models.  We first used a simple linear regression model, this model indicates there is a negative linear relationship between salary and number of complaints received.  We then expanded scope to multivariate regression models, including potentially confounding demographic variables such as age, race and gender.  Given that the demographic variables had statistically significant coefficients, they were identified as potentially confounding variables and taken into consideration in modeling the relationship between number of complaints and salary.  
 
-Datasets and documents used in this project are sourced from the Chicago Police Department (CPD), Civillian Office of Police Accountability (COPA), the Independent Police Review Authority (IPRA), or the City of Chicago. However, we are building off of data that has been cleaned and matched from a [repository](https://github.com/invinst/chicago-police-data) maintained by the [Invisible Institute](https://invisible.institute/introduction). 
+Datasets and documents used in this project are sourced from the Chicago Police Department (CPD), Civilian Office of Police Accountability (COPA), the Independent Police Review Authority (IPRA), or the City of Chicago. However, we are building off of data that has been cleaned and matched from a [repository](https://github.com/invinst/chicago-police-data) maintained by the [Invisible Institute](https://invisible.institute/introduction). 
 
 ## Report
 The final report can be found [here](https://htmlpreview.github.io/?https://github.com/UBC-MDS/CPD/blob/main/doc/chicago_police_report.html)
 
 ## Usage
-In order to replicate our analysis, clone this GitHub repository, ensure you have installed all the dependencies below, then run the following commands at the command lin/terminal from the project directory. 
+There are two suggested ways to replicate our analysis:
 
+**1. Using Docker**
+
+*note - the instructions in this section also depends on running this in a unix shell (e.g. terminal or Git Bash)*
+
+First install [Docker](https://www.docker.com/get-started).  Then clone this GitHub repository and run the following command at the command line/terminal from the root directory of this project:
+
+On a Windows machine:
 ```
-# Download data
-python src/download_data.py --url=https://github.com/invinst/chicago-police-data/blob/master/data/unified_data/complaints/complaints-complaints.csv.gz?raw=true --path=data/raw/complaints.csv
-python src/download_data.py --url=https://github.com/invinst/chicago-police-data/blob/master/data/unified_data/complaints/complaints-accused.csv.gz?raw=true --path=data/raw/accused.csv
-python src/download_data.py --url=https://github.com/invinst/chicago-police-data/blob/master/data/unified_data/salary/salary-ranks_2002-2017_2017-09.csv.gz?raw=true --path=data/raw/salary.csv
-python src/download_data.py --url=https://github.com/invinst/chicago-police-data/blob/master/data/unified_data/profiles/final-profiles.csv.gz?raw=true --path=data/raw/demographics.csv
-
-# Clean / preprocess data
-Rscript src/read_preprocess_data.R --file_path=data/raw --out_dir=data/processed
-
-# Create exploritory data analysis figures and write to file
-Rscript src/generate_EDA_figures.R --all_data=data/processed/complaints_all_staff.csv --police_data=data/processed/complaints_police.csv --out_dir=eda/images
-
-# Run statistical analysis 
-Rscript src/linear_regression_analysis --file_path=data/processed --out_dir=results
+docker run --rm -v "PATH-ON-YOUR-COMPUTER":/home/rstudio/CPD elanor333/cpd:v0.5.0 make --directory=home/rstudio/CPD all
 ```
+On a non-Windows machine:
+```
+docker run --rm -v /$(pwd):/home/rstudio/CPD elanor333/cpd:v0.5.0 make -C home/rstudio/CPD all
+```
+
+To reset the repo to a clean state, with no intermediate or results files, run the following command at the command line/terminal from the root directory of this project:
+
+On a Windows machine:
+```
+docker run --rm -v "PATH-ON-YOUR-COMPUTER":/home/rstudio/CPD elanor333/cpd:v0.5.0 make --directory=home/rstudio/CPD clean
+```
+On a non-Windows machine:
+```
+docker run --rm -v /$(pwd):/home/rstudio/CPD elanor333/cpd:v0.5.0 make -C home/rstudio/CPD all
+```
+
+**2. Without using Docker**
+
+To replicate the analysis, clone this GitHub repository, install the [dependencies](https://github.com/UBC-MDS/CPD#dependencies) listed below, then run the following commands at the command line/terminal from the root project directory:
+```
+make all
+```
+To reset the repo to a clean state, with no intermediate or results files, run the following command at the command line/terminal from the root directory of this project:
+```
+make clean
+```
+## Makefile Dependency Diagram
+![](makefile.png)
 
 ## Dependencies
 - Python 3.8.3 and Python packages:
