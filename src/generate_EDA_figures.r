@@ -17,6 +17,7 @@ library(janitor)
 library(stringr)
 library(lubridate)
 library(docopt)
+library(testthat)
 
 opt <- docopt(doc)
 
@@ -92,8 +93,16 @@ complaints_police %>%
     scale_x_continuous(labels = scales::label_dollar()) +
     ggsave(paste0(out_dir,"/police_salary_dist.png"))
 
-#Histogram function - need to create tests    
+#Create Histogram function    
 create_histogram <- function(year_input, x_input, title, x_lab, y_lab, file_name) {
+    if(!is.numeric(year_input)){
+      stop("year_input must be numerical value")
+    }
+  
+    if(!is.character(title)|| !is.character(x_lab) || !is.character(y_lab)){
+      stop("title, x_lab, y_lab must be string")
+    }
+  
     complaints_police %>% filter(year == year_input) %>% 
         ggplot(aes(x = {{x_input}})) + geom_histogram(bins = 20) +
         ggtitle(title) +
@@ -101,29 +110,46 @@ create_histogram <- function(year_input, x_input, title, x_lab, y_lab, file_name
         ggsave(paste0(out_dir,file_name))
 }    
 
+test_that("Incorrect inputs should throw out error", {
+    expect_error(create_histogram(2015, approx_age, 1, TRUE, 2, 'text'))
+    expect_error(create_histogram('text', approx_age, 'text','text','text','text'))
+})
+
 #Police Officer Age Dist (2015, chosen b/c a recent year that is pretty representative)
 create_histogram(2015, approx_age, 'Approximate Age of Police Officers in 2015', 'Approximate Age', 'Count', '/police_age_dist.png')
 
 #Distribution of years of service in 2015    
 create_histogram(2015, approx_years_service, 'Approximate Years of Service of Police Officers in 2015', 'Approximate Years of Service', 'Count', '/police_exp_dist.png')    
 
+#Create Bar Chart Function
+create_barchart <- function(year_input, y_input, title, x_lab, y_lab, file_name){
+    if(!is.numeric(year_input)){
+      stop("year_input must be numerical value")
+    }
+  
+    if(!is.character(title)|| !is.character(x_lab) || !is.character(y_lab)){
+      stop("title, x_lab, y_lab must be string")
+    }
+  
+    complaints_police %>% filter(year == year_input) %>% group_by(year, {{y_input}}) %>% 
+      add_count({{y_input}}) %>% 
+      ggplot(aes(y = reorder({{y_input}},-n))) + 
+      geom_bar() +
+      ggtitle(title) +
+      labs(x = x_lab , y = y_lab) +
+      ggsave(paste0(out_dir,file_name))
+}
+
+test_that("Incorrect inputs should throw out error", {
+    expect_error(create_barchart(2015, approx_age, 5, TRUE, 72, 'text'))
+    expect_error(create_barchart('text', approx_age, 'text','text','text','text'))
+})
+
 # Gender Bar Chart 2015
-complaints_police %>% filter(year == 2015) %>% group_by(year, gender) %>% 
-    add_count(gender) %>% 
-    ggplot(aes(x = reorder(gender, -n))) + 
-    geom_bar() +
-    ggtitle("2015 Police Officer Gender Breakdown") +
-    labs(x = "Gender", y = "Count") +
-    ggsave(paste0(out_dir,"/police_gender.png"))
+create_barchart(2015, gender, "2015 Police Officer Gender Breakdown", "Gender", "Count", "/police_gender.png")
 
 # Race Bar Chart for 2015
-complaints_police %>% filter(year == 2015) %>% group_by(year, race) %>% 
-    add_count(race) %>% 
-    ggplot(aes(y = reorder(race,-n))) + 
-    geom_bar() + facet_wrap(~year) + 
-    ggtitle("2015 Police Officer Race Breakdown") +
-    labs(x = "Count" , y = "Race") + 
-    ggsave(paste0(out_dir,"/police_race.png"))
+create_barchart(2015, race, "2015 Police Officer Race Breakdown", "Race", "Count", "/police_race.png")
 
 #Correlation Matrix ggpairs (can't use ggsave to save png)
 png(paste0(out_dir,"/corr_matrix.png"))
