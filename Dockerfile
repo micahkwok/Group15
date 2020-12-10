@@ -1,4 +1,4 @@
-# Docker file for the Chicago Police Department complaint analysis
+# Docker file for the Chicago Police Department complaint analysis 2005-20015
 # Author: Ela Bandari, Elanor Boyle-Stanley, Micah Kwok
 # Date: December 10, 2020
 
