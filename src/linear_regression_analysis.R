@@ -20,7 +20,7 @@ complaints_police <- read_csv(paste0(file_path, "/complaints_police.csv"))
 
 # Scale salaries for regression
 complaints_police <- complaints_police %>% 
-  mutate(salary_scaled = salary / 10000, 
+  mutate(salary_scaled = salary/1000,
          race = as.factor(race),
          gender = as.factor(gender))
 
@@ -36,15 +36,12 @@ saveRDS(salary_reg_tidy, file = paste0(out_dir, "/salary_reg.rds"))
 
 # Create figure of simple linear model
 ggplot(complaints_police, aes(x = salary_scaled, y = complaints_per_year)) +
-  geom_point() +
-  geom_abline(slope = coefficients(salary_reg)[2],
-            intercept = coefficients(salary_reg)[1], color = "blue") +
-  labs(title = " ",
-    x = "Salary (in $10,000)",
+  geom_point(alpha = 0.05) +
+  geom_smooth(method = lm, se = TRUE) +
+  labs(title = "Number of Complaints vs. Salary (in $1000 USD) \nwith Line of Regession",
+    x = "Salary (in $1,000 USD)",
     y = "Number of Complaints") + 
-  scale_x_continuous(labels = scales::label_dollar()) +
   ggsave(paste0(out_dir,"/salary_reg.png"))
-
 
 
 # Linear regression model with salary and gender 
@@ -58,7 +55,6 @@ salary_demographics_reg <- lm(complaints_per_year ~ salary_scaled + gender + rac
 salary_demographics_reg_tidy <- broom::tidy(salary_demographics_reg)
 
 saveRDS(salary_demographics_reg_tidy , file = paste0(out_dir, "/salary_demographics_reg.rds"))
-
 
 
 }
