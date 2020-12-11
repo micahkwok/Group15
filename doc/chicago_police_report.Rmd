@@ -1,5 +1,5 @@
 ---
-title: "Relationship of salary and complaints received by police officers"
+title: "Relationship of Salary and Complaints Received by Police Officers"
 author: "Ela Bandari, Elanor Boyle-Stanley, Micah Kwok"
 date: "December 12, 2020"
 bibliography: references.bib
@@ -15,7 +15,7 @@ library(knitr)
 
 # Summary
 
-In this project we attempt to investigate whether there is an association between the number of complaints a police officer in the Chicago Police Department receives per year and the officer's annual salary. To better understand this relationship we constructed and examined three linear regression models: 1) a simple linear regression model with number of complaints per year as the response variable and annual salary as the predictor variable, 2) a multivariable linear regression model with number of complaints per year as the response variable and annual salary and gender of the officer as the predictor variables, and 3) a multivariable linear regression model with number of complaints per year as the response variable and annual salary, gender, race and age of the officer as the predictor variables. We included demographic variables in two of our regression models as they can have confounding effects in our investigation of the association between number of complaints per year and annual salary. Based on an examination of the coefficients of regression and their p-values we can conclude that there is a small but significant association between number of complaints an officer receives per year and their annual salary.
+In this project we attempt to investigate whether there is an association between the number of complaints a police officer in the Chicago Police Department receives per year and that officer's annual salary for the corresponding year. To better understand this relationship we constructed and examined three linear regression models: 1) a simple linear regression model with number of complaints per year as the response variable and annual salary as the predictor variable, 2) a multivariable linear regression model with number of complaints per year as the response variable and annual salary and gender of the officer as the predictor variables, and 3) a multivariable linear regression model with number of complaints per year as the response variable and annual salary, gender, race and age of the officer as the predictor variables. We included demographic variables in two of our regression models as they can have confounding effects in our investigation of the association between number of complaints per year and annual salary. Based on an examination of the coefficients of regression and their p-values we can conclude that there is a small but significant association between number of complaints an officer receives per year and their annual salary.
 
 # Introduction
 
@@ -30,15 +30,19 @@ In summary, we aim to answer the main inferential question of whether a police s
 The original datasets and documents are sourced from the Chicago Police Department (CPD), Civillian Office of Police Accountability (COPA), the Independent Police Review Authority (IPRA), or the City of Chicago. However, we are building off of data that has been cleaned and matched from a [repository](https://github.com/invinst/chicago-police-data) maintained by the Invisible Institute [@iInstitute]. We have used a subset of the data from the years 2005 to 2015.
 
 ## Data Processing
+### Missing Values 
+Given  the large number of observations in this dataset, we decided to drop any observation with missing salary or demographic values.
 
+### Computing complaints per year 
+To calculate the number of complaints an officer receives per year, we used public records of complaints lodged against police officers by members of general public. We summed all the complaints lodged against an officer (i.e. sum of occurrences of an officer's unique ID in complaints dataset) for each year. 
 
+### Scaling
+Given the large scale difference between the number of complaints per year and annual salary, we decided to scale the salary to thousands of dollars (i.e. divide salary by 1000) for our linear regression models in order to improve the interpretability of the coefficients.
 
 ## Analysis
-
-Simple and multivariable linear regression models were used to determine if there was an association between the number of complaints an officer receives per year and the officer's salary. Number of complaints, salary and officer demographic variables (i.e. gender, race and age) were the variables used from the original dataset. The R programming language [@R] and the following R packages: tidyverse [@tidyverse], doctopt [@docopt], knitr [@knitr], janitor [@janitor], lubridate [@lubridate], GGally [@GGally], broom [@broom] and testthat [@testthat] were used to conduct these analyses. The code used to perform the analysis and create this report can be found here: <https://github.com/UBC-MDS/CPD>
+Simple and multivariable linear regression models were used to determine if there was an association between the number of complaints an officer receives per year and that officer's salary for the corresponding year. Number of complaints, salary and officer demographic variables (i.e. gender, race and age) are the variables used from the original dataset. The R programming language [@R] and the following R packages: tidyverse [@tidyverse], doctopt [@docopt], knitr [@knitr], janitor [@janitor], lubridate [@lubridate], GGally [@GGally], broom [@broom] and testthat [@testthat] were used to conduct these analyses. The code used to perform the analysis and create this report can be found here: <https://github.com/UBC-MDS/CPD>
 
 # Results and Discussion
-
 To better answer whether a police staff's salary influences the number of complaints they receive per year, we found it helpful to start with a high level view of the Chicago Police Data and looked at the number of complaints per year. From 2007 onward complaints per year have actually been falling, with a portion of that most likely attributed to declining total staff numbers. Instead, if we look at the complaints per year per officer in Figure 1, we see that the overall trend has not really changed from year to year.
 
 ```{r faceted histogram, echo = FALSE, out.width = '75%', out.height = '75%', fig.cap="Figure 1. Complaints per officer faceted by year"}
@@ -66,7 +70,7 @@ Our first linear model is a simple linear model described by the following equat
 
 $$ \texttt{complaints_per_year}_i = \beta_0 + \beta_1 \times \texttt{salary_scaled}_i + \varepsilon_i $$
 
-The coefficents of this model and their p-values are presented below:
+The coefficient of this model and their p-values are presented below:
 
 ```{r}
 knitr::kable(readRDS('../results/salary_reg.rds'), caption = "Table 1. Simple Linear Regression Model Coefficients and p-values.")
@@ -74,17 +78,17 @@ knitr::kable(readRDS('../results/salary_reg.rds'), caption = "Table 1. Simple Li
 
 Our line of regression can also be visualized by the graph below:
 
-```{r regression visualization, echo = FALSE, out.width = '75%', out.height = '75%', fig.cap="Figure 4. Scatterplot with Line of Regression in Blue", out.width = "75%"}
+```{r regression visualization, echo = FALSE, out.width = '75%', out.height = '75%', fig.cap="Figure 4. Line of Regression for Simple Regression Model", out.width = "75%"}
 knitr::include_graphics('../results/salary_reg.png')
 ```
 
 ### Interpretation of Simple Regression Model
 
-Our simple regression model indicated a change of 0.09258197 in scaled_salary is associated with 1 complaint decrease in number of complaints received by a police officer in a year.
+Our simple regression model indicated a change of 0.009258197 in scaled_salary is associated with 1 complaint decrease in number of complaints received by a police officer in a year.
 
 ### Multivariable Regression Models
 
-In addition to the simple regression model, we have also considered multivariable linear regression models that would take into account confounding effects by demographics factors.
+In addition to the simple regression model, we have also considered multivariable linear regression models that also take into account confounding effects by demographics factors.
 
 Our second model includes a single demographic term, gender, which seemed to have explanatory power according to our EDA. It is described by the equation below:
 
@@ -106,9 +110,10 @@ The coefficients of this model and their p-values are presented below:
 knitr::kable(readRDS('../results/salary_demographics_reg.rds'), caption = "Table 3. Multivariable Regression Model considering effect of all demographic variables.")
 ```
 
-As seen above, the additional demographic variables have statistically significant coefficients, which implies that they have an effect on the number of complaints. Therefore we should take these potentially confounding variables into account to control for their effect on the number of complaints. This would allow us to examine the true relationship between salary and number of complaints while considering these variables. As per Tiff's suggestions, we will be evaluating the performance of these models in the next iteration of our project once we have learned this material in 561. We plan to determine which model can best describe our data.
+As seen above, the additional demographic variables have statistically significant coefficients, which implies that they have an effect on the number of complaints. Therefore we should take these potentially confounding variables into account to control for their effect on the number of complaints. This would allow us to examine the true relationship between salary and number of complaints while considering these variables.
 
-We also acknowledge that our data does not fit all the assumptions of linear regression, therefore, we will be interpreting the results of our analysis with caution. The assumption of independence is likely not met as individual officers may appear in more than one year. Additionally, it appears that the assumption of linearity is also violated based on Figure 9 as there appears to be a curvilinear relationship rather than a linear relationship between our variables of interest.
+## Limitations
+We acknowledge that our data does not fit all the assumptions of linear regression, therefore, we add advise to interpret the results of our analysis with caution. The assumption of independence is likely not met as individual officers may appear in more than one year. Additionally, it appears that the assumption of linearity is also violated based on Figure 4.
 
 # References
 
