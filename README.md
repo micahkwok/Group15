@@ -5,7 +5,7 @@
 Analysis of complaints received by the Chicago Police Department from the years 2005-2015.  Investigation of the relationship between salary and number of complaints received.  
 
 ## About
-Here we attempted to determine if there is a relationship between salary and number of complaints received by Police Officers working for the Chicago Police Department for the years 2005-2015, using linear regression models.  We first used a simple linear regression model, this model indicates there is a negative linear relationship between salary and number of complaints received.  We then expanded scope to multivariate regression models, including potentially confounding demographic variables such as age, race and gender.  Given that the demographic variables had statistically significant coefficients, they were identified as potentially confounding variables and taken into consideration in modeling the relationship between number of complaints and salary.  
+Here we attempted to determine if there is a relationship between salary and number of complaints received by Police Officers working for the Chicago Police Department for the years 2005-2015, using linear regression models.  We first used a simple linear regression model, this model indicates there is a negative linear relationship between salary and number of complaints received.  We then expanded scope to multivariable regression models, including potentially confounding demographic variables such as age, race and gender.  Given that the demographic variables had statistically significant coefficients, they were identified as potentially confounding variables and taken into consideration in modeling the relationship between number of complaints and salary.  
 
 Datasets and documents used in this project are sourced from the Chicago Police Department (CPD), Civilian Office of Police Accountability (COPA), the Independent Police Review Authority (IPRA), or the City of Chicago. However, we are building off of data that has been cleaned and matched from a [repository](https://github.com/invinst/chicago-police-data) maintained by the [Invisible Institute](https://invisible.institute/introduction). 
 
@@ -52,7 +52,7 @@ To reset the repo to a clean state, with no intermediate or results files, run t
 make clean
 ```
 ## Makefile Dependency Diagram
-![](makefile.png?raw=true)
+![makefile_diagram](https://github.com/UBC-MDS/CPD/blob/main/Makefile.png?raw=true)
 
 ## Dependencies
 - Python 3.8.3 and Python packages:
