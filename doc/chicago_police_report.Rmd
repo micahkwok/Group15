@@ -84,7 +84,7 @@ knitr::include_graphics('../results/salary_reg.png')
 
 ### Interpretation of Simple Regression Model
 
-Our simple regression model indicated a change of 0.009258197 in scaled_salary is associated with 1 complaint decrease in number of complaints received by a police officer in a year.
+Given a significance level of $\alpha = 0.05$, our results were statistically significant and the simple regression model indicated a change of 0.009258197 in scaled_salary is associated with 1 complaint decrease in number of complaints received by a police officer in a year.
 
 ### Multivariable Regression Models
 
@@ -110,7 +110,7 @@ The coefficients of this model and their p-values are presented below:
 knitr::kable(readRDS('../results/salary_demographics_reg.rds'), caption = "Table 3. Multivariable Regression Model considering effect of all demographic variables.")
 ```
 
-As seen above, the additional demographic variables have statistically significant coefficients, which implies that they have an effect on the number of complaints. Therefore we should take these potentially confounding variables into account to control for their effect on the number of complaints. This would allow us to examine the true relationship between salary and number of complaints while considering these variables.
+As seen above, with a significance level of $\alpha = 0.05$, the additional demographic variables have statistically significant coefficients, which implies that they have an effect on the number of complaints. Therefore we should take these potentially confounding variables into account to control for their effect on the number of complaints. This would allow us to examine the true relationship between salary and number of complaints while considering these variables.
 
 ## Limitations
 We acknowledge that our data does not fit all the assumptions of linear regression, therefore, we add advise to interpret the results of our analysis with caution. The assumption of independence is likely not met as individual officers may appear in more than one year. Additionally, it appears that the assumption of linearity is also violated based on Figure 4.
