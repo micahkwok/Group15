@@ -21,7 +21,7 @@ In this project we attempt to investigate whether there is an association betwee
 
 The recent social climate has made us more aware of the systemic problems embedded within police departments; especially in the context of police interaction with members of the public. It is important to examine what factors are contributing to the misconduct of police staff members. Police staff misconduct is documented in complaints lodged against members of the police staff which is publicly available information. We are interested in seeing what factors contribute to the number of complaints a police staff member receives in a year. Based on previous research [@policePay], demonstrating a relationship between arrest rates and police staff member salary, we suspect that salary may also be associated the number of complaints. Research in the social sciences, also nudges us to consider demographic variables as potentially confounding variables. This is because demographic variables could impact both our explanatory (e.g. women on average earn less than their male counterparts) and response variables (e.g. women in policing receive less complaints). Therefore, it is important to account for the effects of demographic variables when examining the relationship between number of complaints and salary.
 
-In summary, we aim to answer the main inferential question of whether a police staff member's salary influences the number of complaints they receive per year.
+In summary, we aim to answer the main inferential question of whether a police staff member's salary is associated with the number of complaints they receive per year.
 
 # Methods
 
@@ -84,17 +84,17 @@ knitr::include_graphics('../results/salary_reg.png')
 
 ### Interpretation of Simple Regression Model
 
-Given a significance level of $\alpha = 0.05$, our results were statistically significant and the simple regression model indicated a change of 0.009258197 in scaled_salary is associated with 1 complaint decrease in number of complaints received by a police officer in a year.
+At the significance level of $\alpha = 0.05$, our results were statistically significant and the simple regression model indicates that a 1 unit increase in scaled salary is associated with 0.009258197 complaint decrease in number of complaints received by a police officer in a year.
 
 ### Multivariable Regression Models
 
-In addition to the simple regression model, we have also considered multivariable linear regression models that also take into account confounding effects by demographics factors.
+In addition to the simple regression model, we also considered multivariable regression models that take into account the confounding effects of demographics factors.
 
 Our second model includes a single demographic term, gender, which seemed to have explanatory power according to our EDA. It is described by the equation below:
 
 $$ \texttt{complaints_per_year}_i = \beta_0 + \beta_1 \times \texttt{salary_scaled}_i + \beta_2 \times \texttt{gender}_i + \varepsilon_i $$
 
-The coefficients of this model and their p-values are presented below:
+The coefficients of this model and their p-values are presented below. Please note that the gender `Female` is the reference category.
 
 ```{r}
 knitr::kable(readRDS('../results/salary_gender_reg.rds'), caption = "Table 2. Multivariable Regression Model considering effect of Gender.")
@@ -104,16 +104,16 @@ Our third and final model includes all demographic terms(i.e. gender, race and a
 
 $$ \texttt{complaints_per_year}_i = \beta_0 + \beta_1 \times \texttt{salary_scaled}_i + \beta_2 \times \texttt{gender}_i + \beta_3 \times \texttt{race}_i +  \beta_4 \times \texttt{approx_age}_i + \varepsilon_i $$
 
-The coefficients of this model and their p-values are presented below:
+The coefficients of this model and their p-values are presented below. Please note that the gender `Female` and race `Asian` are the reference categories.
 
 ```{r}
 knitr::kable(readRDS('../results/salary_demographics_reg.rds'), caption = "Table 3. Multivariable Regression Model considering effect of all demographic variables.")
 ```
 
-As seen above, with a significance level of $\alpha = 0.05$, the additional demographic variables have statistically significant coefficients, which implies that they have an effect on the number of complaints. Therefore we should take these potentially confounding variables into account to control for their effect on the number of complaints. This would allow us to examine the true relationship between salary and number of complaints while considering these variables.
+As seen above, with a significance level of $\alpha = 0.05$, the additional demographic variables have statistically significant coefficients, which implies that they have an effect on the number of complaints. Therefore we should take these potentially confounding variables into account to control for their effect on the number of complaints. This would allow us to examine the true relationship between salary and number of complaints while holding the effect of the demographic variables constant. Model 3, which includes all demographic variables, suggests that a 1 unit increase in scaled salary is associated with a 0.0033879 increase in complaint received by a police officer while holding the effects of gender, race and approximate age constant. 
 
-## Limitations
-We acknowledge that our data does not fit all the assumptions of linear regression, therefore, we add advise to interpret the results of our analysis with caution. The assumption of independence is likely not met as individual officers may appear in more than one year. Additionally, it appears that the assumption of linearity is also violated based on Figure 4.
+## Limitations and Future Directions
+We acknowledge that our data does not fit all the assumptions of linear regression, therefore, we advise to interpret the results of our analysis with caution. The assumption of independence is likely not met as individual officers may appear in more than one year. Additionally, it appears that the assumption of linearity is also violated based a visual analysis of Figure 3. We suggest researcher interested in our research question, consider models such as polynomial regression and generalized linear regression with a Poisson or negative binomial link as these models may be better suited to the data.
 
 # References
 
