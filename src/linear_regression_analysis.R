@@ -38,7 +38,7 @@ saveRDS(salary_reg_tidy, file = paste0(out_dir, "/salary_reg.rds"))
 ggplot(complaints_police, aes(x = salary_scaled, y = complaints_per_year)) +
   geom_point(alpha = 0.05) +
   geom_smooth(method = lm, se = TRUE) +
-  labs(title = "Number of Complaints vs. Salary (in $1000 USD) \nwith Line of Regession",
+  labs(title = "Number of Complaints vs. Salary (in $1000 USD) \nwith Line of Regression",
     x = "Salary (in $1,000 USD)",
     y = "Number of Complaints") + 
   ggsave(paste0(out_dir,"/salary_reg.png"))
